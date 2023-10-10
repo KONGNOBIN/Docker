@@ -11,7 +11,7 @@ docker container prune (모든 컨테이너 삭제)
 EX) 
     docker rm 207e70515e01      (containerID)
     docker rm eager_borg        (containerName)
-	docker rm -f eager_borg     (containerName)	
+    docker rm -f eager_borg     (containerName)	
 ```
 
 > 옵션 1 [컨테이너 ID]
@@ -28,22 +28,22 @@ EX)
 
 > 옵션 2 [포트연결]
 ``` docker
--p : 컨테이너의 포트를 호스트의 포트와 바인딩, 연결할 수 있게 하는 옵션 
-	 ex) -p (호스트 포트번호):(컨테이너 포트번호)
+-p : 컨테이너의 포트를 호스트의 포트와 바인딩, 연결할 수 있게 하는 옵션
+사용법 : -p (호스트 포트번호):(컨테이너 포트번호)
 
 EX) 
     docker run -i -t --name mywebserver -p 80:80 ubuntu
-	
-	ex) 아파치 웹 서버를 예시로 들 경우
-		아파치 웹 서버 기본 포트 : 80
+
+    ex) 아파치 웹 서버를 예시로 들 경우
+	아파치 웹 서버 기본 포트 : 80
 		
-		현재 아파치 웹 서버는 컨테이너의 IP와 80번 포트로 서비스 중
-		호스트 IP로 웹 서버 접근을 하려면 컨테이너IP:80 주소로 접근해야 함
-		도커의 포트 포워딩옵션인 -p를 사용하여 호스트와 컨테이너를 연결하였으므로
-		호스트의 IP와 포트를 통해 컨테이너IP:80으로 접근이 가능.		
+	현재 아파치 웹 서버는 컨테이너의 IP와 80번 포트로 서비스 중
+	호스트 IP로 웹 서버 접근을 하려면 컨테이너IP:80 주소로 접근해야 함
+	도커의 포트 포워딩옵션인 -p를 사용하여 호스트와 컨테이너를 연결하였으므로
+	호스트의 IP와 포트를 통해 컨테이너IP:80으로 접근이 가능.		
 	
 	* 여러 개의 포트를 외부에 개방하려면 여러 번 써서 설정
-    docker run -i -t -p 3306:3306 -p 192.168.0.100:80:80 ubuntu		
+     	docker run -i -t -p 3306:3306 -p 192.168.0.100:80:80 ubuntu		
 	
 	* -p 80과 같이 입력 시 컨테이너의 80번 포트를 쓸 수 있는 포스트의 포트 중 하나와 연결한다.
 	단 어느포트와 연결됐는지 알 수 없으므로 docker ps 명령어를 입력에 PORTS 항목을 확인해야 한다.
@@ -71,23 +71,23 @@ EX)
 
 --link : 컨테이너 별명으로 접근하도록 설정.
 
-
 \(역슬래시) : 각 옵션을 구분지어 가독성을 높힐 수 있음.
+
 
 EX) 
 	데이터베이스와 웹서버 컨테이너 연동
 	
 	1. mysql image를 사용해 DB컨테이너 생성
-    docker run -d \
-    --name wordpressdb \
-    -e MYSQL_ROOT_PASSWORD=gk \
+    	docker run -d \
+    	--name wordpressdb \
+    	-e MYSQL_ROOT_PASSWORD=gk \
 	-e MYSQL_DATABASE=wordpress \
 	mysql:5.7
 	
 	2. wordpress image를 사용해 웹 서버 컨테이너 생성
-	   -p 옵션에서 80을 입력했으므로 호스트의 포트 중 하나와 컨테이너의 80번 포트가 연결됨
+	  -p 옵션에서 80을 입력했으므로 호스트의 포트 중 하나와 컨테이너의 80번 포트가 연결됨
 	docker run -d \    
-    -e WORDPRESS_DB_PASSWORD=gk \
+        -e WORDPRESS_DB_PASSWORD=gk \
 	--name wordpress \
 	--link wordpressdb:mysql \    -- wordpressdb 컨테이너를 mysql라는 이름으로 설정
 	-p 80 \
@@ -100,6 +100,5 @@ EX)
 	4. 호스트의IP:연결포트로 웹서버 접근되는지 CHECK	
 
 ```
-
 
 >환경변수 확인하는 방법
