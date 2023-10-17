@@ -52,7 +52,7 @@ EX)
 [볼륨생성]
 docker volume
 
-[볼륨황용]
+[볼륨활용]
 -v volume이름:경로
 
 
@@ -89,7 +89,11 @@ EX)
 	*mount 옵션 사용방법
 	--mount type:volume,source=myvolume,target=/root
 	
-	*호스트의 디렉터리 컨테이너에 마운트 하는 방법
+	*호스트의 디렉터리 컨테이너에 마운트 하는 방법 (덮어씌우는 방법)
 	--mount type=bind,source=/home/wordpress_db,target=/home/testdir
+
+	*컨테이너 하나당 한볼륨으로 처리
+	  MSSQL 컨테이너를 여러개 가동할 경우 1볼륨 1컨테이너로 설정한다.
+	  (동일볼륨으로 여러개의 컨테이너 설정시 2번째부터 등록되는 컨테이너는 자동종료됨)
     
 ```
