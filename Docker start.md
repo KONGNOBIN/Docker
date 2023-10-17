@@ -89,3 +89,14 @@ EX)
     docker inspect eager_borg | grep Id   (containerName의 'Id'단어가 포함되는 내용 출력)
         결과값 : "Id": "207e70515e016c36f35c80714bfefba016c9ea3d6872039a298ecc09a40fd172",
 ```
+> 컨테이너 삭제
+``` docker
+docker rm containerID or containerName  (정지된 container 삭제)
+docker rm -f containerID or containerName  (실행중인 container 삭제)
+docker container prune (모든 컨테이너 삭제)
+
+EX) 
+    docker rm 207e70515e01      (containerID)
+    docker rm eager_borg        (containerName)
+    docker rm -f eager_borg     (containerName)	
+```

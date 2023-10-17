@@ -2,17 +2,7 @@
 
 ### 친절한 설명으로 쉽게 이해하는 컨테이너 관리
 
-> 컨테이너 삭제
-``` docker
-docker rm containerID or containerName  (정지된 container 삭제)
-docker rm -f containerID or containerName  (실행중인 container 삭제)
-docker container prune (모든 컨테이너 삭제)
 
-EX) 
-    docker rm 207e70515e01      (containerID)
-    docker rm eager_borg        (containerName)
-    docker rm -f eager_borg     (containerName)	
-```
 
 > 옵션 1 [컨테이너 ID]
 
@@ -100,5 +90,3 @@ EX)
 	4. 호스트의IP:연결포트로 웹서버 접근되는지 CHECK	
 
 ```
-
->환경변수 확인하는 방법
