@@ -39,11 +39,14 @@
 		ps -ef | grep dockerd
 
 	2. HTTP Request 통해 API 확인
-		docker API documentation 참고 (1.40 ver)
-		(https://docs.docker.com/engine/api/v1.40/)	
-
-		하단 Test	
+	하단 참고
+	
 ```
+> docker API documentation (1.4v)
+
+[docker API documentation](https://docs.docker.com/engine/api/v1.40/)	
+		
+
 > Container List 확인
 
 	IP주소:2375/containers/json (=docker ps)
@@ -66,4 +69,4 @@
 		ExecStart=/usr/bin/dockerd -H unix:///var/run/docker.sock -H tcp://0.0.0.0:2376
 ```
 > 그림 1
-![alt text](./images/docker%20remote%20vi.png.png)
+![alt text](./images/docker%20remote%20vi.png)
