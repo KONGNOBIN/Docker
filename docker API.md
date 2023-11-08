@@ -15,7 +15,7 @@
 	Docker deamon은 Socket 방식의 3가지 타입을 가진다. (unix, tcp, fd)
 
 	1. tcp 활성화		
-    [명령어]
+   	[명령어]
 		dockerd -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock
 
 	-H tcp://0.0.0.0:2375 : 어떤 ip에 있는 client들이 모두(0.0.0.0) 2375포트로 접근할 수 있도록 허용해주는 tcp설정
