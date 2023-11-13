@@ -3,7 +3,7 @@
 
 > Rest API 통신방법
 
-``` docker
+``` bash
 
 	원격으로 도커를 제어하는 방법
 
@@ -14,6 +14,7 @@
 	따라서, API 요청을 받기 위해
 	Docker deamon은 Socket 방식의 3가지 타입을 가진다. (unix, tcp, fd)
 
+	ps aux | grep docker
 	1. tcp 활성화		
     [명령어]
 		dockerd -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock
@@ -59,14 +60,32 @@
 ![alt text](./images/docker%20API%20Test%20II.png)
 
 
-> 기타 다른 방법 (안됨..)
+> 기타 다른 방법 
 ```docker
 	0. docker.service파일의 TCP소켓 접속허용 설정
 	[명령어]
 		vi /lib/systemd/system/docker.service
 
-	그림 1 처럼 수정	
-		ExecStart=/usr/bin/dockerd -H unix:///var/run/docker.sock -H tcp://0.0.0.0:2376
+	수정	
+		ExecStart=/usr/bin/dockerd 
+		-H unix:///var/run/docker.sock 
+		-H fd:// --containerd=/run/containerd/containerd.sock 
+		-H tcp://0.0.0.0:2375
 ```
 > 그림 1
 ![alt text](./images/docker%20remote%20vi.png)
+
+
+> 원격 PC 도커 제어 방법
+``` bash
+	1. 네트워크 상태 확인 
+	[명령어]
+		telnet IP 포트번호
+	
+	방화벽에서 해당포트가 허용되어 있는지 확인
+	- 인바운드 규칙까지 넣었는데 포트가 안열린다..
+
+    도커내부 - 호스트 - 원격 연결방법..
+
+
+```
