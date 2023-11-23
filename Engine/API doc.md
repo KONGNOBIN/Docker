@@ -12,7 +12,7 @@
 	  	  IP:Port/containers/json 
 		  IP:Port/containers/json?all=false
 
-		  [전체 컨테이너 리스트] (= docker ps)
+		  [전체 컨테이너 리스트] (= docker ps -a)
 		  IP:Port/containers/json?all=true
 
 	  ex)
