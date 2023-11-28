@@ -6,61 +6,90 @@
 		
 
 > Container List 확인
-	
-	  * GET 
-	  	  [실행 컨테이너 리스트] (= docker ps)
+
+	  [실행 컨테이너 리스트]
+	  * ubuntu : docker ps
+	  * GET 	  	   
 	  	  IP:Port/containers/json 
 		  IP:Port/containers/json?all=false
 
-		  [전체 컨테이너 리스트] (= docker ps -a)
+	  [전체 컨테이너 리스트]
+	  * ubuntu : docker ps -a		   
+	  * GET 
 		  IP:Port/containers/json?all=true
 
 	  ex)
 	  	  http://172.27.193.70:2375/containers/json?all=true 	
 
+
 > Container 실행
-	
-	  * POST 
-	  	  [컨테이너 실행] (= docker start containerID)
+
+	  * ubuntu : docker start containerID
+	  * POST 	  	  
 	  	  IP:Port/containers/containerID/start
 
 	  ex)
 	  	  http://172.27.193.70:2375/containers/0483eaf/start	
 
 
-> Container 실행
-	
-	  * POST 
-	  	  [컨테이너 실행] (= docker start containerID)
+> Container 재실행 (실행과 무슨차이(?))
+
+	  * ubuntu : docker restart containerID
+	  * POST 	  	  
 	  	  IP:Port/containers/containerID/start
+		  IP:Port/containers/containerID/restart?t=5
+		  <t : 컨테이너 종료 대기 시간>
 
 	  ex)
-	  	  http://172.27.193.70:2375/containers/0483eaf/start
+	  	  http://172.27.193.70:2375/containers/0483eaf/start	
+
+
+> Container 중지 (하고있는 작업을 마무리하고 종료)
+
+	  * ubuntu : docker stop containerID
+	  * POST 	  	  
+	  	  IP:Port/containers/containerID/stop
+
+	  ex)
+		  http://172.27.193.70:2375/containers/0483eaf9f2ce/stop
+
+
+> Container Kill (작업 유무 상관없이 강제 종료)
+
+	  * ubuntu : docker kill containerID
+	  * POST 	  	  
+	  	  IP:Port/containers/containerID/kill
+
+	  ex)
+		  http://172.27.193.70:2375/containers/0483eaf9f2ce/kill
 
 
 > Container 삭제
-	 
-	  * DELETE 
-	  	  [컨테이너 삭제] (= docker rm containerID)
+
+	  * ubuntu : docker rm containerID
+	  * DELETE 	  	  
 	  	  IP:Port/containers/containerID 
 
 	  ex)
 		  http://172.27.193.70:2375/containers/c6baf5a8
 
 
+
+
+
 > Container 상세
-	 
-	  * GET 
-	  	  [컨테이너 상세] (= docker inspect containerID)
+
+	  * ubuntu : docker inspect containerID
+	  * GET 	  	  
 	  	  IP:Port/containers/containerID/json
 
 	  ex)
 		  http://172.27.193.70:2375/containers/c7fc/json  
 
 > Container 생성
-	 
-	  * POST 
-	  	  [실행 컨테이너 리스트] (= docker create --name containerName image)
+
+	  * ubuntu : docker create --name containerName image
+	  * POST 	  	  
 	  	  IP:Port/containers/create 
 		  IP:Port/containers/create?name=containerName
 	  [body]
@@ -127,3 +156,45 @@
 
 	  ex)
 	  	  http://172.27.193.70:2375/containers/create?name=postgres_test
+
+> Container Logs
+	 
+	  * ubuntu : docker logs containerID
+	  * GET 	  	  
+	  	  IP:Port/containers/containerID/logs
+
+	  ex)
+		  http://172.27.193.70:2375/containers/0483eaf9f2ce/logs
+
+
+> Container 파일시스템 변경사항 가져오기
+	 
+	  * GET 
+	  	  IP:Port/containers/containerID/changes
+
+	  ex)
+		  http://172.27.193.70:2375/containers/0483eaf9f2ce/changes  
+
+
+> Container 내보내기
+	 
+	  * ubuntu : docker export [옵션] containerID
+	  * GET 	  
+	  	  IP:Port/containers/containerID/export
+
+	  ex)
+		  http://172.27.193.70:2375/containers/0483eaf9f2ce/export 
+
+
+> Container 실시간 구동 상태
+	 	  
+	  * ubuntu : docker stats [옵션] containerID
+	    [옵션]
+		: -a, -all : 모든 컨테이너 출력
+		: --no-stream : 실시간 스트리밍이 아닌 한번 출력
+
+	  * GET 	  
+	  	  IP:Port/containers/containerID/stats?stream=true/false
+
+	  ex)
+		  http://172.27.193.70:2375/containers/0483eaf9f2ce/stats?stream=false 
