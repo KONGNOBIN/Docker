@@ -63,7 +63,7 @@ EX)
 	...	
 ```
 > 네트워크 구조 이미지
-![alt text](./images/networkstructure.jpg)
+![alt text](../images/networkstructure.jpg)
 
 > 네트워크 기능
 ``` docker
@@ -150,4 +150,4 @@ EX)
 
 ```
 
-![alt text](./images/containernetwork.jpg)
+![alt text](../images/containernetwork.jpg)

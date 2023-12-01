@@ -31,6 +31,9 @@
 	  * POST 	  	  
 	  	  IP:Port/containers/containerID/start
 
+	  * QUERY PARAMETERS
+	      detachKeys : 컨테이너 분리를 위한 정의 (a-Z, ctrl-value 등)
+		  
 	  ex)
 	  	  http://172.27.193.70:2375/containers/0483eaf/start	
 
@@ -40,12 +43,13 @@
 	  * ubuntu : docker restart containerID
 
 	  * POST 	  	  
-	  	  IP:Port/containers/containerID/start
-		  IP:Port/containers/containerID/restart?t=5
-		  <t : 컨테이너 종료 대기 시간>
+	  	  IP:Port/containers/containerID/restart		  
+	   
+	  * QUERY PARAMETERS
+	      t : 컨테이너 종료 전 대기 시간 지정 (정수)
 
 	  ex)
-	  	  http://172.27.193.70:2375/containers/0483eaf/start	
+	  	  http://172.27.193.70:2375/containers/0483eaf/restart	
 
 
 > Container 중지 (하고있는 작업을 마무리하고 종료)
@@ -54,6 +58,9 @@
 
 	  * POST 	  	  
 	  	  IP:Port/containers/containerID/stop
+
+	  * QUERY PARAMETERS
+	      t : 컨테이너 종료 전 대기 시간 지정 (정수)
 
 	  ex)
 		  http://172.27.193.70:2375/containers/0483eaf9f2ce/stop
@@ -66,6 +73,9 @@
 	  * POST 	  	  
 	  	  IP:Port/containers/containerID/kill
 
+	  * QUERY PARAMETERS
+	      signal : 컨테이너에 보내는 신호 (정수/문자열) (Default : "SIGKILL")
+
 	  ex)
 		  http://172.27.193.70:2375/containers/0483eaf9f2ce/kill
 
@@ -76,6 +86,11 @@
 
 	  * DELETE 	  	  
 	  	  IP:Port/containers/containerID 
+
+	  * QUERY PARAMETERS
+	      v : 컨테이너와 연결된 볼륨 제거 여부 (Default : "false")
+	      force : 실행중인 컨테이너 종료 여부 (Default : "false")
+	      link : 컨테이너와 연결된 지정된 링크 제거 여부 (Default : "false")
 
 	  ex)
 		  http://172.27.193.70:2375/containers/c6baf5a8
@@ -89,7 +104,10 @@
 		: --no-stream : 실시간 스트리밍이 아닌 한번 출력
 
 	  * POST 	  
-	  	  IP:Port/containers/containerID/rename?name=변경할이름
+	  	  IP:Port/containers/containerID/rename
+
+	  * QUERY PARAMETERS
+	      name <필수> : 변경할 컨테이와 이름
 
 	  ex)
 		  http://172.27.193.70:2375/containers/0483eaf9f2ce/rename?name=postgres 
@@ -115,6 +133,9 @@
 
 	  * GET 	  	  
 	  	  IP:Port/containers/containerID/json
+		
+	  * QUERY PARAMETERS
+	  	  size : 컨테이너 크기 반환 (Default : "false")
 
 	  ex)
 		  http://172.27.193.70:2375/containers/c7fc/json  
@@ -122,10 +143,15 @@
 > Container 생성
 
 	  * ubuntu : docker create --name containerName image
+
 	  * POST 	  	  
 	  	  IP:Port/containers/create 
 		  IP:Port/containers/create?name=containerName
-	  [body]
+		
+	  * QUERY PARAMETERS
+	  	  name : 컨테이너 이름 지정
+
+	  * BODY SCHEMA
 	  		{
 			    "Hostname": "",      
 			    "Domainname": "",
@@ -197,6 +223,7 @@
 
 	  * GET 	  	  
 	  	  IP:Port/containers/containerID/top
+
 	  * QUERY PARAMETERS
 	      ps_args : 전달할 인수 (Default : -ef)
 		  	        -e : 로그인한 사용자 관계없이 모든 프로세스
@@ -215,6 +242,7 @@
 
 	  * GET 	  	  
 	  	  IP:Port/containers/containerID/logs
+
 	  * QUERY PARAMETERS
 	      follow : Log 반환 후 연결 유지 여부 (Default : false)
 		  stdout : 출력 여부 (Default : false)
@@ -278,6 +306,7 @@
 
 	  * HEAD 	  
 	  	  IP:Port/containers/containerID/archive
+
 	  * QUERY PARAMETERS
 	      path : 컨테이너 파일 시스템의 리소스
 
